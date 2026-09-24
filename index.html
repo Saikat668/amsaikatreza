@@ -4,228 +4,277 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>A. M. Saikat Reza — HSTU Mathematics</title>
-  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Hind+Siliguri:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    body { font-family: 'Plus Jakarta Sans', sans-serif; }
-    /* ভাষা পরিবর্তনের লজিক: যেই ভাষা অ্যাক্টিভ থাকবে না, সেটি হাইড থাকবে */
+    :root {
+      --bg: #0b1026; --ink: #eef1ff; --muted: #a9b1d6;
+      --pink: #ff5fa2; --violet: #8b5cf6; --cyan: #22d3ee; --amber: #fbbf24; --mint: #34d399;
+    }
+    html { scroll-padding-top: 5rem; }
+    body {
+      font-family: 'Plus Jakarta Sans', 'Hind Siliguri', sans-serif;
+      background: var(--bg); color: var(--ink); overflow-x: hidden;
+    }
+    .display { font-family: 'Fraunces', 'Hind Siliguri', serif; }
     html[lang="bn"] .lang-en { display: none !important; }
     html[lang="en"] .lang-bn { display: none !important; }
+
+    /* ---------- Aurora background ---------- */
+    .aurora { position: fixed; inset: 0; z-index: -2; overflow: hidden;
+      background: radial-gradient(1200px 700px at 50% -10%, #1b1f4b 0%, var(--bg) 60%); }
+    .blob { position: absolute; border-radius: 50%; filter: blur(90px); opacity: .55; will-change: transform; }
+    .b1 { width: 46vw; height: 46vw; left: -10vw; top: -8vw; background: var(--violet); animation: drift1 22s ease-in-out infinite alternate; }
+    .b2 { width: 40vw; height: 40vw; right: -8vw; top: 10vh; background: var(--pink); animation: drift2 26s ease-in-out infinite alternate; }
+    .b3 { width: 44vw; height: 44vw; left: 20vw; bottom: -18vw; background: var(--cyan); opacity: .4; animation: drift3 30s ease-in-out infinite alternate; }
+    .b4 { width: 26vw; height: 26vw; right: 12vw; bottom: 8vh; background: var(--amber); opacity: .28; animation: drift1 24s ease-in-out infinite alternate-reverse; }
+    @keyframes drift1 { to { transform: translate(12vw, 10vh) scale(1.15); } }
+    @keyframes drift2 { to { transform: translate(-14vw, 14vh) scale(.9); } }
+    @keyframes drift3 { to { transform: translate(10vw, -12vh) scale(1.2); } }
+
+    .grid-overlay { position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: .5;
+      background-image: linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+      background-size: 56px 56px;
+      -webkit-mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
+      mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%); }
+
+    /* floating math symbols */
+    .sym { position: fixed; z-index: -1; bottom: -60px; font-family: 'Fraunces', serif; color: rgba(255,255,255,.16);
+      pointer-events: none; animation: rise linear infinite; }
+    @keyframes rise { to { transform: translateY(-115vh) rotate(360deg); } }
+
+    /* ---------- Header ---------- */
+    .glass { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12);
+      -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
+
+    /* ---------- Hero ---------- */
+    .grad-text { background: linear-gradient(100deg, var(--cyan), var(--violet) 40%, var(--pink) 75%, var(--amber));
+      background-size: 250% auto; -webkit-background-clip: text; background-clip: text; color: transparent;
+      animation: shine 8s linear infinite; }
+    @keyframes shine { to { background-position: 250% center; } }
+
+    .hero-in > * { opacity: 0; transform: translateY(22px); animation: up .8s cubic-bezier(.2,.7,.2,1) forwards; }
+    .hero-in > *:nth-child(1) { animation-delay: .1s; } .hero-in > *:nth-child(2) { animation-delay: .25s; }
+    .hero-in > *:nth-child(3) { animation-delay: .45s; } .hero-in > *:nth-child(4) { animation-delay: .6s; }
+    @keyframes up { to { opacity: 1; transform: none; } }
+
+    .photo-wrap { position: relative; padding: 5px; border-radius: 2rem; }
+    .photo-wrap::before { content: ""; position: absolute; inset: -4px; border-radius: 2.2rem; z-index: -1;
+      background: conic-gradient(from 0deg, var(--cyan), var(--violet), var(--pink), var(--amber), var(--mint), var(--cyan));
+      animation: spin 6s linear infinite; filter: blur(14px); opacity: .85; }
+    .photo-wrap::after { content: ""; position: absolute; inset: 0; border-radius: 2rem; z-index: -1;
+      background: conic-gradient(from 0deg, var(--cyan), var(--violet), var(--pink), var(--amber), var(--mint), var(--cyan));
+      animation: spin 6s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .photo { animation: float 6s ease-in-out infinite; }
+    @keyframes float { 50% { transform: translateY(-10px); } }
+
+    .btn-primary { background: linear-gradient(100deg, var(--violet), var(--pink)); box-shadow: 0 10px 30px -8px rgba(139,92,246,.7);
+      transition: transform .25s, box-shadow .25s; }
+    .btn-primary:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 16px 36px -8px rgba(255,95,162,.7); }
+    .btn-ghost { transition: background .25s, transform .25s; }
+    .btn-ghost:hover { background: rgba(255,255,255,.14); transform: translateY(-3px); }
+
+    /* ---------- Cards ---------- */
+    .card { position: relative; border-radius: 1.5rem; transition: transform .35s cubic-bezier(.2,.7,.2,1), border-color .35s; overflow: hidden; }
+    .card::before { content: ""; position: absolute; inset: 0; opacity: 0; transition: opacity .35s;
+      background: radial-gradient(400px circle at var(--mx, 50%) var(--my, 0%), var(--glow), transparent 60%); }
+    .card:hover { transform: translateY(-8px); border-color: var(--edge); }
+    .card:hover::before { opacity: 1; }
+    .card > * { position: relative; }
+    .c-violet { --glow: rgba(139,92,246,.30); --edge: rgba(139,92,246,.7); --tag: #c4b5fd; --tagbg: rgba(139,92,246,.2); }
+    .c-mint   { --glow: rgba(52,211,153,.26); --edge: rgba(52,211,153,.7); --tag: #6ee7b7; --tagbg: rgba(52,211,153,.18); }
+    .c-amber  { --glow: rgba(251,191,36,.26); --edge: rgba(251,191,36,.7); --tag: #fde68a; --tagbg: rgba(251,191,36,.18); }
+    .tag { color: var(--tag); background: var(--tagbg); }
+    .icon { width: 3rem; height: 3rem; display: grid; place-items: center; font-size: 1.5rem; border-radius: 1rem; background: var(--tagbg); }
+    .card:hover .icon { animation: wiggle .6s ease; }
+    @keyframes wiggle { 30% { transform: rotate(-12deg) scale(1.1); } 60% { transform: rotate(10deg) scale(1.1); } }
+
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity .8s, transform .8s cubic-bezier(.2,.7,.2,1); }
+    .reveal.show { opacity: 1; transform: none; }
+
+    a:focus-visible, button:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .reveal, .hero-in > * { opacity: 1; transform: none; }
+    }
   </style>
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased">
+<body class="antialiased">
 
-  <!-- নেভিগেশন বার -->
-  <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
-    <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-      <a href="#" class="font-bold text-lg tracking-tight text-slate-900">A. M. Saikat Reza</a>
-      
-      <div class="flex items-center gap-6">
-        <nav class="hidden sm:flex items-center gap-6 text-sm font-medium">
-          <a href="#about" class="text-slate-600 hover:text-blue-600 transition">
-            <span class="lang-bn">পরিচিতি</span>
-            <span class="lang-en">About</span>
-          </a>
-          <a href="#hstu" class="text-slate-600 hover:text-blue-600 transition">
-            <span class="lang-bn">হাবিপ্রবি ও ফাইলস</span>
-            <span class="lang-en">HSTU & Files</span>
-          </a>
+  <div class="aurora"><i class="blob b1"></i><i class="blob b2"></i><i class="blob b3"></i><i class="blob b4"></i></div>
+  <div class="grid-overlay"></div>
+  <div id="symbols" aria-hidden="true"></div>
+
+  <!-- নেভিগেশন -->
+  <header class="sticky top-3 z-50 px-4">
+    <div class="glass max-w-6xl mx-auto px-5 h-14 rounded-2xl flex items-center justify-between shadow-lg shadow-black/20">
+      <a href="#" class="display font-bold text-lg tracking-tight">A. M. Saikat Reza</a>
+      <div class="flex items-center gap-5">
+        <nav class="hidden sm:flex items-center gap-5 text-sm font-medium text-[color:var(--muted)]">
+          <a href="#about" class="hover:text-white transition"><span class="lang-bn">পরিচিতি</span><span class="lang-en">About</span></a>
+          <a href="#hstu" class="hover:text-white transition"><span class="lang-bn">হাবিপ্রবি ও ফাইলস</span><span class="lang-en">HSTU &amp; Files</span></a>
         </nav>
-
-        <!-- ভাষা পরিবর্তনের বাটন -->
-        <button id="langToggleBtn" onclick="toggleLanguage()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-300 bg-white text-xs font-semibold text-slate-700 hover:bg-slate-100 shadow-sm transition">
-          <span class="text-blue-600">🌐</span>
-          <span id="btnLangText">English</span>
+        <button id="langToggleBtn" onclick="toggleLanguage()" class="btn-ghost flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-white/20 bg-white/10 text-xs font-semibold">
+          <span>🌐</span><span id="btnLangText">English</span>
         </button>
       </div>
     </div>
   </header>
 
   <main>
-    <!-- ১. নাম ও পরিচিতি সেকশন (Profile / About) -->
-    <section id="about" class="py-16 md:py-24 border-b border-slate-200">
+    <!-- পরিচিতি -->
+    <section id="about" class="py-16 md:py-28">
       <div class="max-w-6xl mx-auto px-6">
-        <div class="flex flex-col-reverse md:flex-row items-center gap-12 justify-between">
-          
-          <!-- টেক্সট ও পরিচয় -->
-          <div class="flex-1 space-y-5 text-center md:text-left">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-semibold tracking-wide border border-blue-200">
-              <span class="w-2 h-2 rounded-full bg-blue-600 animate-pulse"></span>
+        <div class="flex flex-col-reverse md:flex-row items-center gap-14 justify-between">
+
+          <div class="hero-in flex-1 space-y-6 text-center md:text-left">
+            <div class="glass inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold text-cyan-200">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
               Department of Mathematics · HSTU
             </div>
-            
-            <h1 class="text-4xl md:text-6xl font-bold tracking-tight text-slate-900 leading-tight">
-              A. M. Saikat Reza
-            </h1>
-            
-            <!-- বায়ো (বাংলা ও ইংরেজি) -->
-            <p class="lang-bn text-lg md:text-xl text-slate-600 leading-relaxed max-w-2xl">
-              গবেষক ও শিক্ষার্থী, গণিত বিভাগ। কাজ করছি <span class="text-slate-900 font-medium">Mathematical Modeling</span>, <span class="text-slate-900 font-medium">Optimization</span> এবং <span class="text-slate-900 font-medium">Data Analysis</span> নিয়ে।
-            </p>
-            <p class="lang-en text-lg md:text-xl text-slate-600 leading-relaxed max-w-2xl">
-              Graduate Student & Researcher in Mathematics. Working at the intersection of <span class="text-slate-900 font-medium">Mathematical Modeling</span>, <span class="text-slate-900 font-medium">Optimization</span>, and <span class="text-slate-900 font-medium">Data Analysis</span>.
-            </p>
+
+            <h1 class="display grad-text text-5xl md:text-7xl font-extrabold leading-[1.05] tracking-tight">A. M. Saikat Reza</h1>
+
+            <div>
+              <p class="lang-bn text-lg md:text-xl text-[color:var(--muted)] leading-relaxed max-w-2xl">
+                গবেষক ও শিক্ষার্থী, গণিত বিভাগ। কাজ করছি <b class="text-cyan-300 font-semibold">Mathematical Modeling</b>, <b class="text-pink-300 font-semibold">Optimization</b> এবং <b class="text-amber-300 font-semibold">Data Analysis</b> নিয়ে।
+              </p>
+              <p class="lang-en text-lg md:text-xl text-[color:var(--muted)] leading-relaxed max-w-2xl">
+                Graduate Student &amp; Researcher in Mathematics. Working at the intersection of <b class="text-cyan-300 font-semibold">Mathematical Modeling</b>, <b class="text-pink-300 font-semibold">Optimization</b>, and <b class="text-amber-300 font-semibold">Data Analysis</b>.
+              </p>
+            </div>
 
             <div class="flex flex-wrap items-center justify-center md:justify-start gap-4 pt-2">
-              <a href="#hstu" class="px-6 py-3 rounded-xl bg-blue-600 text-white font-medium hover:bg-blue-700 shadow-sm transition">
-                <span class="lang-bn">ড্রাইভ ফাইল ও রিসোর্স দেখুন</span>
-                <span class="lang-en">View Drive Files & Resources</span>
+              <a href="#hstu" class="btn-primary px-6 py-3 rounded-xl text-white font-semibold">
+                <span class="lang-bn">ড্রাইভ ফাইল ও রিসোর্স দেখুন</span><span class="lang-en">View Drive Files &amp; Resources</span>
               </a>
-              <a href="mailto:amsaikatreza@gmail.com" class="px-6 py-3 rounded-xl border border-slate-300 bg-white text-slate-700 font-medium hover:bg-slate-50 transition">
-                <span class="lang-bn">ইমেইল করুন</span>
-                <span class="lang-en">Get in Touch</span>
+              <a href="mailto:amsaikatreza@gmail.com" class="btn-ghost glass px-6 py-3 rounded-xl font-semibold">
+                <span class="lang-bn">ইমেইল করুন</span><span class="lang-en">Get in Touch</span>
               </a>
             </div>
           </div>
 
-          <!-- প্রোফাইল ছবি -->
-          <div class="flex-shrink-0">
-            <div class="relative w-44 h-44 sm:w-56 sm:h-56 rounded-2xl overflow-hidden shadow-xl border-4 border-white bg-slate-200">
-              <img src="Saikat_12_2026.png" alt="A. M. Saikat Reza" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x400?text=Profile+Photo'">
-            </div>
-          </div>
+          <div class="flex-shrink-0 hero-in"><div>
+            <div class="photo-wrap"><div class="photo w-44 h-44 sm:w-60 sm:h-60 rounded-[1.7rem] overflow-hidden bg-slate-800">
+              <img src="Saikat_12_2026.png" alt="A. M. Saikat Reza" class="w-full h-full object-cover" onerror="this.onerror=null;this.src='https://placehold.co/400x400/1b1f4b/ffffff?text=Profile+Photo'">
+            </div></div>
+          </div></div>
 
         </div>
       </div>
     </section>
 
-    <!-- ২. হাবিপ্রবি ও গণিত বিভাগ (HSTU & Math Dept Files Section) -->
-    <section id="hstu" class="py-16 md:py-24 bg-white">
+    <!-- হাবিপ্রবি ও ফাইলস -->
+    <section id="hstu" class="py-16 md:py-24">
       <div class="max-w-6xl mx-auto px-6 space-y-12">
-        
-        <!-- সেকশন হেডার -->
-        <div class="text-center md:text-left space-y-3">
-          <div class="inline-block text-sm font-semibold uppercase tracking-wider text-blue-600">
-            <span class="lang-bn">একাডেমিক হাব</span>
-            <span class="lang-en">Academic Hub</span>
-          </div>
 
-          <h2 class="text-3xl md:text-4xl font-bold text-slate-900">
-            <span class="lang-bn">হাজী মোহাম্মদ দানেশ বিজ্ঞান ও প্রযুক্তি বিশ্ববিদ্যালয় (হাবিপ্রবি)</span>
-            <span class="lang-en">Hajee Mohammad Danesh Science & Technology University (HSTU)</span>
+        <div class="reveal text-center md:text-left space-y-3">
+          <div class="text-sm font-semibold text-cyan-300"><span class="lang-bn">একাডেমিক হাব</span><span class="lang-en">Academic Hub</span></div>
+          <h2 class="display text-3xl md:text-5xl font-extrabold leading-tight">
+            <span class="lang-bn">হাজী মোহাম্মদ দানেশ বিজ্ঞান ও প্রযুক্তি বিশ্ববিদ্যালয়</span>
+            <span class="lang-en">Hajee Mohammad Danesh Science &amp; Technology University</span>
           </h2>
-
-          <p class="lang-bn text-slate-600 text-lg max-w-2xl">
-            গণিত বিভাগের একাডেমিক কোর্সওয়ার্ক, স্টাডি মেটেরিয়ালস, অ্যাসাইনমেন্ট ও প্রয়োজনীয় ড্রাইভ লিংকগুলো নিচে দেওয়া হলো:
-          </p>
-          <p class="lang-en text-slate-600 text-lg max-w-2xl">
-            Academic coursework, research materials, assignments, and study resources from the Department of Mathematics:
-          </p>
+          <p class="lang-bn text-[color:var(--muted)] text-lg max-w-2xl">গণিত বিভাগের কোর্সওয়ার্ক, স্টাডি মেটেরিয়ালস, অ্যাসাইনমেন্ট ও প্রয়োজনীয় ড্রাইভ লিংক নিচে দেওয়া হলো:</p>
+          <p class="lang-en text-[color:var(--muted)] text-lg max-w-2xl">Academic coursework, research materials, assignments, and study resources from the Department of Mathematics:</p>
         </div>
 
-        <!-- ড্রাইভ লিংক ও ফাইল কার্ড গ্রিড -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
-          <!-- ড্রাইভ কার্ড ১ -->
-          <div class="border border-slate-200 rounded-2xl p-6 hover:shadow-md transition bg-slate-50 flex flex-col justify-between">
-            <div class="space-y-3">
-              <span class="inline-block text-xs font-bold px-2.5 py-1 rounded bg-indigo-100 text-indigo-700">
-                <span class="lang-bn">রিসার্চ / থিসিস</span>
-                <span class="lang-en">Research / Thesis</span>
-              </span>
-              <h3 class="text-xl font-semibold text-slate-900">SIR Epidemic Model Research</h3>
-              <p class="lang-bn text-slate-600 text-sm leading-relaxed">
-                মডেলিং অফ এপিডেমিকস, নন-লিনিয়ার ডিফারেনশিয়াল ইকুয়েশন ও সিমিউলেশন সংক্রান্ত প্রেজেন্টেশন ও ড্রাইভ ফাইল।
-              </p>
-              <p class="lang-en text-slate-600 text-sm leading-relaxed">
-                Mathematical modeling of epidemic spread, nonlinear ODE stability, simulation data, and presentation slides.
-              </p>
+          <div class="reveal card glass c-violet p-7 flex flex-col justify-between" style="transition-delay:.05s">
+            <div class="space-y-4">
+              <div class="flex items-center justify-between">
+                <span class="icon">🦠</span>
+                <span class="tag text-xs font-bold px-3 py-1 rounded-full"><span class="lang-bn">রিসার্চ / থিসিস</span><span class="lang-en">Research / Thesis</span></span>
+              </div>
+              <h3 class="display text-xl font-bold">SIR Epidemic Model Research</h3>
+              <p class="lang-bn text-[color:var(--muted)] text-sm leading-relaxed">মডেলিং অফ এপিডেমিকস, নন-লিনিয়ার ডিফারেনশিয়াল ইকুয়েশন ও সিমুলেশন সংক্রান্ত প্রেজেন্টেশন ও ড্রাইভ ফাইল।</p>
+              <p class="lang-en text-[color:var(--muted)] text-sm leading-relaxed">Mathematical modeling of epidemic spread, nonlinear ODE stability, simulation data, and presentation slides.</p>
             </div>
-            <div class="pt-6">
-              <a href="https://drive.google.com" target="_blank" class="inline-flex items-center text-sm font-semibold text-blue-600 hover:text-blue-700 gap-1">
-                <span class="lang-bn">গুগল ড্রাইভে ফাইল দেখুন &rarr;</span>
-                <span class="lang-en">View Drive Files &rarr;</span>
-              </a>
-            </div>
+            <a href="https://drive.google.com" target="_blank" rel="noopener" class="pt-6 inline-flex items-center text-sm font-semibold text-violet-300 hover:text-white gap-1 transition">
+              <span class="lang-bn">গুগল ড্রাইভে ফাইল দেখুন &rarr;</span><span class="lang-en">View Drive Files &rarr;</span>
+            </a>
           </div>
 
-          <!-- ড্রাইভ কার্ড ২ -->
-          <div class="border border-slate-200 rounded-2xl p-6 hover:shadow-md transition bg-slate-50 flex flex-col justify-between">
-            <div class="space-y-3">
-              <span class="inline-block text-xs font-bold px-2.5 py-1 rounded bg-emerald-100 text-emerald-700">
-                <span class="lang-bn">লেকচার নোটস</span>
-                <span class="lang-en">Lecture Notes</span>
-              </span>
-              <h3 class="text-xl font-semibold text-slate-900">Functional Analysis & Calculus</h3>
-              <p class="lang-bn text-slate-600 text-sm leading-relaxed">
-                অনার্স ও এমএস ক্লাসের হ্যান্ডনোট, থিওরেম এবং ক্লাস মেটেরিয়ালসের সম্পূর্ণ ড্রাইভ ফোল্ডার।
-              </p>
-              <p class="lang-en text-slate-600 text-sm leading-relaxed">
-                Lecture handnotes, theorem proofs, and study materials for undergraduate and graduate mathematics courses.
-              </p>
+          <div class="reveal card glass c-mint p-7 flex flex-col justify-between" style="transition-delay:.15s">
+            <div class="space-y-4">
+              <div class="flex items-center justify-between">
+                <span class="icon">∫</span>
+                <span class="tag text-xs font-bold px-3 py-1 rounded-full"><span class="lang-bn">লেকচার নোটস</span><span class="lang-en">Lecture Notes</span></span>
+              </div>
+              <h3 class="display text-xl font-bold">Functional Analysis &amp; Calculus</h3>
+              <p class="lang-bn text-[color:var(--muted)] text-sm leading-relaxed">অনার্স ও এমএস ক্লাসের হ্যান্ডনোট, থিওরেম এবং ক্লাস মেটেরিয়ালসের সম্পূর্ণ ড্রাইভ ফোল্ডার।</p>
+              <p class="lang-en text-[color:var(--muted)] text-sm leading-relaxed">Lecture handnotes, theorem proofs, and study materials for undergraduate and graduate mathematics courses.</p>
             </div>
-            <div class="pt-6">
-              <a href="https://drive.google.com" target="_blank" class="inline-flex items-center text-sm font-semibold text-blue-600 hover:text-blue-700 gap-1">
-                <span class="lang-bn">গুগল ড্রাইভে ফাইল দেখুন &rarr;</span>
-                <span class="lang-en">View Drive Files &rarr;</span>
-              </a>
-            </div>
+            <a href="https://drive.google.com" target="_blank" rel="noopener" class="pt-6 inline-flex items-center text-sm font-semibold text-emerald-300 hover:text-white gap-1 transition">
+              <span class="lang-bn">গুগল ড্রাইভে ফাইল দেখুন &rarr;</span><span class="lang-en">View Drive Files &rarr;</span>
+            </a>
           </div>
 
-          <!-- ড্রাইভ কার্ড ৩ -->
-          <div class="border border-slate-200 rounded-2xl p-6 hover:shadow-md transition bg-slate-50 flex flex-col justify-between">
-            <div class="space-y-3">
-              <span class="inline-block text-xs font-bold px-2.5 py-1 rounded bg-amber-100 text-amber-700">
-                <span class="lang-bn">কম্পিউটেশনাল ফাইল</span>
-                <span class="lang-en">Computational Code</span>
-              </span>
-              <h3 class="text-xl font-semibold text-slate-900">MATLAB & Python Scripts</h3>
-              <p class="lang-bn text-slate-600 text-sm leading-relaxed">
-                ম্যাথ ল্যাব এবং অপ্টিমাইজেশন প্রবলেম সমাধানের কোড ফাইল ও নির্দেশিকা।
-              </p>
-              <p class="lang-en text-slate-600 text-sm leading-relaxed">
-                MATLAB scripts, numerical simulations, and Python optimization algorithms code repository.
-              </p>
+          <div class="reveal card glass c-amber p-7 flex flex-col justify-between" style="transition-delay:.25s">
+            <div class="space-y-4">
+              <div class="flex items-center justify-between">
+                <span class="icon">💻</span>
+                <span class="tag text-xs font-bold px-3 py-1 rounded-full"><span class="lang-bn">কম্পিউটেশনাল ফাইল</span><span class="lang-en">Computational Code</span></span>
+              </div>
+              <h3 class="display text-xl font-bold">MATLAB &amp; Python Scripts</h3>
+              <p class="lang-bn text-[color:var(--muted)] text-sm leading-relaxed">MATLAB এবং অপ্টিমাইজেশন প্রবলেম সমাধানের কোড ফাইল ও নির্দেশিকা।</p>
+              <p class="lang-en text-[color:var(--muted)] text-sm leading-relaxed">MATLAB scripts, numerical simulations, and Python optimization algorithms code repository.</p>
             </div>
-            <div class="pt-6">
-              <a href="https://drive.google.com" target="_blank" class="inline-flex items-center text-sm font-semibold text-blue-600 hover:text-blue-700 gap-1">
-                <span class="lang-bn">গুগল ড্রাইভে ফাইল দেখুন &rarr;</span>
-                <span class="lang-en">View Drive Files &rarr;</span>
-              </a>
-            </div>
+            <a href="https://drive.google.com" target="_blank" rel="noopener" class="pt-6 inline-flex items-center text-sm font-semibold text-amber-300 hover:text-white gap-1 transition">
+              <span class="lang-bn">গুগল ড্রাইভে ফাইল দেখুন &rarr;</span><span class="lang-en">View Drive Files &rarr;</span>
+            </a>
           </div>
 
         </div>
-
       </div>
     </section>
   </main>
 
-  <!-- ফুটার -->
-  <footer class="py-8 bg-slate-900 text-slate-400 text-sm text-center">
+  <footer class="py-8 text-[color:var(--muted)] text-sm text-center border-t border-white/10">
     <p class="lang-bn">© 2026 A. M. Saikat Reza · গণিত বিভাগ, হাবিপ্রবি</p>
     <p class="lang-en">© 2026 A. M. Saikat Reza · Department of Mathematics, HSTU</p>
   </footer>
 
-  <!-- জাভাস্ক্রিপ্ট: ভাষা সুইচ করার লজিক -->
   <script>
     function setLanguage(lang) {
       document.documentElement.setAttribute('lang', lang);
-      const btnText = document.getElementById('btnLangText');
-      if (lang === 'bn') {
-        btnText.textContent = 'English';
-      } else {
-        btnText.textContent = 'বাংলা';
-      }
-      localStorage.setItem('preferredLang', lang);
+      document.getElementById('btnLangText').textContent = lang === 'bn' ? 'English' : 'বাংলা';
+      try { localStorage.setItem('preferredLang', lang); } catch (e) {}
     }
-
     function toggleLanguage() {
-      const currentLang = document.documentElement.getAttribute('lang') || 'bn';
-      const newLang = currentLang === 'bn' ? 'en' : 'bn';
-      setLanguage(newLang);
+      setLanguage((document.documentElement.getAttribute('lang') || 'bn') === 'bn' ? 'en' : 'bn');
     }
+    try { const s = localStorage.getItem('preferredLang'); if (s) setLanguage(s); } catch (e) {}
 
-    // আগের সংরক্ষিত ভাষা চেক করা
-    const savedLang = localStorage.getItem('preferredLang');
-    if (savedLang) {
-      setLanguage(savedLang);
-    }
+    // ভাসমান গাণিতিক চিহ্ন
+    const chars = ['∑','∫','π','∞','√','Δ','∂','θ','λ','≈','∇','x²','e','φ'];
+    const box = document.getElementById('symbols');
+    chars.forEach((c, i) => {
+      const s = document.createElement('span');
+      s.className = 'sym';
+      s.textContent = c;
+      s.style.left = (4 + (i * 97) % 92) + '%';
+      s.style.fontSize = (22 + (i * 13) % 34) + 'px';
+      s.style.animationDuration = (22 + (i * 7) % 20) + 's';
+      s.style.animationDelay = '-' + ((i * 5) % 30) + 's';
+      box.appendChild(s);
+    });
+
+    // স্ক্রল করলে কার্ড ফুটে ওঠা
+    const io = new IntersectionObserver((en) => en.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('show'); io.unobserve(e.target); }
+    }), { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    // কার্ডে মাউস অনুযায়ী glow
+    document.querySelectorAll('.card').forEach(c => c.addEventListener('pointermove', e => {
+      const r = c.getBoundingClientRect();
+      c.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+      c.style.setProperty('--my', (e.clientY - r.top) + 'px');
+    }));
   </script>
-
 </body>
 </html>
