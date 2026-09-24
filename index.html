@@ -63,10 +63,10 @@
     .photo-wrap { position: relative; padding: 5px; border-radius: 2rem; }
     .photo-wrap::before { content: ""; position: absolute; inset: -4px; border-radius: 2.2rem; z-index: -1;
       background: conic-gradient(from 0deg, var(--cyan), var(--violet), var(--pink), var(--amber), var(--mint), var(--cyan));
-      animation: spin 6s linear infinite; filter: blur(14px); opacity: .85; }
+      filter: blur(14px); opacity: .85; }
     .photo-wrap::after { content: ""; position: absolute; inset: 0; border-radius: 2rem; z-index: -1;
       background: conic-gradient(from 0deg, var(--cyan), var(--violet), var(--pink), var(--amber), var(--mint), var(--cyan));
-      animation: spin 6s linear infinite; }
+      }
     @keyframes spin { to { transform: rotate(360deg); } }
     .photo { animation: float 6s ease-in-out infinite; }
     @keyframes float { 50% { transform: translateY(-10px); } }
