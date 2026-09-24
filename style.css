@@ -81,6 +81,7 @@
     .card.reveal { transition: opacity .8s, transform .35s cubic-bezier(.2,.7,.2,1), border-color .35s; }
     .card.show:hover { transform: translateY(-8px); }
     .lvl-line { height: 1px; flex: 1; background: linear-gradient(90deg, rgba(255,255,255,.28), transparent); }
+    .c-cyan   { --glow: rgba(34,211,238,.26); --edge: rgba(34,211,238,.7); --tag: #67e8f9; --tagbg: rgba(34,211,238,.18); }
     .tag { color: var(--tag); background: var(--tagbg); }
     .icon { width: 3rem; height: 3rem; display: grid; place-items: center; font-size: 1.5rem; border-radius: 1rem; background: var(--tagbg); }
     .card:hover .icon { animation: wiggle .6s ease; }

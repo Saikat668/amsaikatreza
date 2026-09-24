@@ -65,14 +65,16 @@ if (grid) {
     { n: 3, bn: '৩য় বর্ষ', icon: '🔬', theme: 'amber', years: '2017–2022',
       sems: ['1EGmIT-sQOsOXAW_A5zTrLjtBhf0rTll4', '1TX03aUcHEBwsNUdXIbyuzxZDpW4foz9d'] },
     { n: 4, bn: '৪র্থ বর্ষ', icon: '🎓', theme: 'pink', years: '2018–2023',
-      sems: ['1clxDnZUd9GbBfPZP3jZSWJQaexu-5Rdx', '1QkprhVaLt4VNDttvJyNKZJm9GUHy-yBb'] }
+      sems: ['1clxDnZUd9GbBfPZP3jZSWJQaexu-5Rdx', '1QkprhVaLt4VNDttvJyNKZJm9GUHy-yBb'] },
+    { n: 5, bn: 'মাস্টার্স', en: 'Masters', icon: '🏛️', theme: 'cyan', years: 'MS',
+      sems: ['1Z1Ixn13sBdDiInxK638DD5Xte7tsIhah', '1O0lxWP9lsmIIGiDeiR_jw7oa5Xjt903l'] }
   ];
   const semBn = ['১ম সেমিস্টার', '২য় সেমিস্টার'];
   grid.innerHTML = levels.map(L => `
     <div>
       <div class="reveal flex items-center gap-4 mb-5">
         <span class="text-3xl">${L.icon}</span>
-        <h3 class="display text-2xl md:text-3xl font-bold"><span class="lang-bn">${L.bn}</span><span class="lang-en">Level ${L.n}</span></h3>
+        <h3 class="display text-2xl md:text-3xl font-bold"><span class="lang-bn">${L.bn}</span><span class="lang-en">${L.en || 'Level ' + L.n}</span></h3>
         <span class="text-sm text-[color:var(--muted)]">${L.years}</span>
         <span class="lvl-line"></span>
       </div>
@@ -81,7 +83,7 @@ if (grid) {
         <div class="reveal card glass c-${L.theme} p-7 flex items-center justify-between gap-4" style="transition-delay:${i * .12}s">
           <div class="space-y-2">
             <span class="tag text-xs font-bold px-3 py-1 rounded-full">L${L.n}-S${i + 1}</span>
-            <h4 class="display text-xl font-bold"><span class="lang-bn">${L.bn}, ${semBn[i]}</span><span class="lang-en">Level ${L.n}, Semester ${i + 1}</span></h4>
+            <h4 class="display text-xl font-bold"><span class="lang-bn">${L.bn}, ${semBn[i]}</span><span class="lang-en">${L.en || 'Level ' + L.n}, Semester ${i + 1}</span></h4>
             <a href="${DRIVE}${id}" target="_blank" rel="noopener" class="inline-flex items-center text-sm font-semibold text-white/90 hover:text-white gap-1 pt-1">
               <span class="lang-bn">গুগল ড্রাইভে ফাইল দেখুন &rarr;</span><span class="lang-en">View Drive Files &rarr;</span>
             </a>
