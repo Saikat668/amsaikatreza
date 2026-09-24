@@ -87,6 +87,11 @@
     .c-violet { --glow: rgba(139,92,246,.30); --edge: rgba(139,92,246,.7); --tag: #c4b5fd; --tagbg: rgba(139,92,246,.2); }
     .c-mint   { --glow: rgba(52,211,153,.26); --edge: rgba(52,211,153,.7); --tag: #6ee7b7; --tagbg: rgba(52,211,153,.18); }
     .c-amber  { --glow: rgba(251,191,36,.26); --edge: rgba(251,191,36,.7); --tag: #fde68a; --tagbg: rgba(251,191,36,.18); }
+
+    .c-pink   { --glow: rgba(255,95,162,.28); --edge: rgba(255,95,162,.7); --tag: #f9a8d4; --tagbg: rgba(255,95,162,.18); }
+    .card.reveal { transition: opacity .8s, transform .35s cubic-bezier(.2,.7,.2,1), border-color .35s; }
+    .card.show:hover { transform: translateY(-8px); }
+    .lvl-line { height: 1px; flex: 1; background: linear-gradient(90deg, rgba(255,255,255,.28), transparent); }
     .tag { color: var(--tag); background: var(--tagbg); }
     .icon { width: 3rem; height: 3rem; display: grid; place-items: center; font-size: 1.5rem; border-radius: 1rem; background: var(--tagbg); }
     .card:hover .icon { animation: wiggle .6s ease; }
@@ -158,7 +163,7 @@
           </div>
 
           <div class="flex-shrink-0 hero-in"><div>
-            <div class="photo-wrap"><div class="photo w-48 h-48 sm:w-60 sm:h-60 rounded-[1.7rem] overflow-hidden bg-slate-800">
+            <div class="photo-wrap"><div class="photo w-44 h-44 sm:w-60 sm:h-60 rounded-[1.7rem] overflow-hidden bg-slate-800">
               <img src="Saikat_12_2026.png" alt="A. M. Saikat Reza" class="w-full h-full object-cover" onerror="this.onerror=null;this.src='https://placehold.co/400x400/1b1f4b/ffffff?text=Profile+Photo'">
             </div></div>
           </div></div>
@@ -177,58 +182,11 @@
             <span class="lang-bn">হাজী মোহাম্মদ দানেশ বিজ্ঞান ও প্রযুক্তি বিশ্ববিদ্যালয়</span>
             <span class="lang-en">Hajee Mohammad Danesh Science &amp; Technology University</span>
           </h2>
-          <p class="lang-bn text-[color:var(--muted)] text-lg max-w-2xl">গণিত বিভাগের কোর্সওয়ার্ক, স্টাডি মেটেরিয়ালস, অ্যাসাইনমেন্ট ও প্রয়োজনীয় ড্রাইভ লিংক নিচে দেওয়া হলো:</p>
-          <p class="lang-en text-[color:var(--muted)] text-lg max-w-2xl">Academic coursework, research materials, assignments, and study resources from the Department of Mathematics:</p>
+          <p class="lang-bn text-[color:var(--muted)] text-lg max-w-2xl">গণিত বিভাগের ৪ বছরের প্রতিটি Level ও Semester-এর study material, নোটস ও প্রশ্ন নিচে Google Drive folder আকারে সাজানো আছে:</p>
+          <p class="lang-en text-[color:var(--muted)] text-lg max-w-2xl">Study materials, notes and question banks from the Department of Mathematics, organised by level and semester as Google Drive folders:</p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-
-          <div class="reveal card glass c-violet p-7 flex flex-col justify-between" style="transition-delay:.05s">
-            <div class="space-y-4">
-              <div class="flex items-center justify-between">
-                <span class="icon">🦠</span>
-                <span class="tag text-xs font-bold px-3 py-1 rounded-full"><span class="lang-bn">রিসার্চ / থিসিস</span><span class="lang-en">Research / Thesis</span></span>
-              </div>
-              <h3 class="display text-xl font-bold">SIR Epidemic Model Research</h3>
-              <p class="lang-bn text-[color:var(--muted)] text-sm leading-relaxed">মডেলিং অফ এপিডেমিকস, নন-লিনিয়ার ডিফারেনশিয়াল ইকুয়েশন ও সিমুলেশন সংক্রান্ত প্রেজেন্টেশন ও ড্রাইভ ফাইল।</p>
-              <p class="lang-en text-[color:var(--muted)] text-sm leading-relaxed">Mathematical modeling of epidemic spread, nonlinear ODE stability, simulation data, and presentation slides.</p>
-            </div>
-            <a href="https://drive.google.com" target="_blank" rel="noopener" class="pt-6 inline-flex items-center text-sm font-semibold text-violet-300 hover:text-white gap-1 transition">
-              <span class="lang-bn">গুগল ড্রাইভে ফাইল দেখুন &rarr;</span><span class="lang-en">View Drive Files &rarr;</span>
-            </a>
-          </div>
-
-          <div class="reveal card glass c-mint p-7 flex flex-col justify-between" style="transition-delay:.15s">
-            <div class="space-y-4">
-              <div class="flex items-center justify-between">
-                <span class="icon">∫</span>
-                <span class="tag text-xs font-bold px-3 py-1 rounded-full"><span class="lang-bn">লেকচার নোটস</span><span class="lang-en">Lecture Notes</span></span>
-              </div>
-              <h3 class="display text-xl font-bold">Functional Analysis &amp; Calculus</h3>
-              <p class="lang-bn text-[color:var(--muted)] text-sm leading-relaxed">অনার্স ও এমএস ক্লাসের হ্যান্ডনোট, থিওরেম এবং ক্লাস মেটেরিয়ালসের সম্পূর্ণ ড্রাইভ ফোল্ডার।</p>
-              <p class="lang-en text-[color:var(--muted)] text-sm leading-relaxed">Lecture handnotes, theorem proofs, and study materials for undergraduate and graduate mathematics courses.</p>
-            </div>
-            <a href="https://drive.google.com" target="_blank" rel="noopener" class="pt-6 inline-flex items-center text-sm font-semibold text-emerald-300 hover:text-white gap-1 transition">
-              <span class="lang-bn">গুগল ড্রাইভে ফাইল দেখুন &rarr;</span><span class="lang-en">View Drive Files &rarr;</span>
-            </a>
-          </div>
-
-          <div class="reveal card glass c-amber p-7 flex flex-col justify-between" style="transition-delay:.25s">
-            <div class="space-y-4">
-              <div class="flex items-center justify-between">
-                <span class="icon">💻</span>
-                <span class="tag text-xs font-bold px-3 py-1 rounded-full"><span class="lang-bn">কম্পিউটেশনাল ফাইল</span><span class="lang-en">Computational Code</span></span>
-              </div>
-              <h3 class="display text-xl font-bold">MATLAB &amp; Python Scripts</h3>
-              <p class="lang-bn text-[color:var(--muted)] text-sm leading-relaxed">MATLAB এবং অপ্টিমাইজেশন প্রবলেম সমাধানের কোড ফাইল ও নির্দেশিকা।</p>
-              <p class="lang-en text-[color:var(--muted)] text-sm leading-relaxed">MATLAB scripts, numerical simulations, and Python optimization algorithms code repository.</p>
-            </div>
-            <a href="https://drive.google.com" target="_blank" rel="noopener" class="pt-6 inline-flex items-center text-sm font-semibold text-amber-300 hover:text-white gap-1 transition">
-              <span class="lang-bn">গুগল ড্রাইভে ফাইল দেখুন &rarr;</span><span class="lang-en">View Drive Files &rarr;</span>
-            </a>
-          </div>
-
-        </div>
+        <div id="folderGrid" class="space-y-14"></div>
       </div>
     </section>
   </main>
@@ -262,6 +220,46 @@
       s.style.animationDelay = '-' + ((i * 5) % 30) + 's';
       box.appendChild(s);
     });
+
+    // Drive folders: নতুন folder যোগ করতে বা link বদলাতে শুধু এই list edit করো
+    const DRIVE = 'https://drive.google.com/drive/folders/';
+    const levels = [
+      { n: 1, bn: '১ম বর্ষ', icon: '🌱', theme: 'violet', years: '2015–2020',
+        sems: ['19vcsRfRf-7MD87UN-2aCPbfdmV_j1h0r', '13d7dGK748nowscmfP0_9MVEvMnpBGY_r'] },
+      { n: 2, bn: '২য় বর্ষ', icon: '📐', theme: 'mint', years: '2016–2021',
+        sems: ['193IK8vyxNbE4SCL4Wl0sNehjXYReJnMf', '1ibjF1_T5Kmx0D-6gp-8CFjylMWJHrd_A'] },
+      { n: 3, bn: '৩য় বর্ষ', icon: '🔬', theme: 'amber', years: '2017–2022',
+        sems: ['1EGmIT-sQOsOXAW_A5zTrLjtBhf0rTll4', '1TX03aUcHEBwsNUdXIbyuzxZDpW4foz9d'] },
+      { n: 4, bn: '৪র্থ বর্ষ', icon: '🎓', theme: 'pink', years: '2018–2023',
+        sems: ['1clxDnZUd9GbBfPZP3jZSWJQaexu-5Rdx', '1QkprhVaLt4VNDttvJyNKZJm9GUHy-yBb'] }
+    ];
+    const semBn = ['১ম সেমিস্টার', '২য় সেমিস্টার'];
+    document.getElementById('folderGrid').innerHTML = levels.map(L => `
+      <div>
+        <div class="reveal flex items-center gap-4 mb-5">
+          <span class="text-3xl">${L.icon}</span>
+          <h3 class="display text-2xl md:text-3xl font-bold">
+            <span class="lang-bn">${L.bn}</span><span class="lang-en">Level ${L.n}</span>
+          </h3>
+          <span class="text-sm text-[color:var(--muted)]">${L.years}</span>
+          <span class="lvl-line"></span>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          ${L.sems.map((id, i) => `
+          <div class="reveal card glass c-${L.theme} p-7 flex items-center justify-between gap-4" style="transition-delay:${i * .12}s">
+            <div class="space-y-2">
+              <span class="tag text-xs font-bold px-3 py-1 rounded-full">L${L.n}-S${i + 1}</span>
+              <h4 class="display text-xl font-bold">
+                <span class="lang-bn">${L.bn}, ${semBn[i]}</span><span class="lang-en">Level ${L.n}, Semester ${i + 1}</span>
+              </h4>
+              <a href="${DRIVE}${id}" target="_blank" rel="noopener" class="inline-flex items-center text-sm font-semibold text-white/90 hover:text-white gap-1 pt-1">
+                <span class="lang-bn">গুগল ড্রাইভে ফাইল দেখুন &rarr;</span><span class="lang-en">View Drive Files &rarr;</span>
+              </a>
+            </div>
+            <span class="icon shrink-0">${L.icon}</span>
+          </div>`).join('')}
+        </div>
+      </div>`).join('');
 
     // স্ক্রল করলে কার্ড ফুটে ওঠা
     const io = new IntersectionObserver((en) => en.forEach(e => {
