@@ -116,6 +116,45 @@ document.querySelectorAll('.card').forEach(c => c.addEventListener('pointermove'
 ------------------------------------------------------------------ */
 const memoryGrid = document.getElementById('memoryGrid');
 if (memoryGrid) {
+  /* ---------- Swipe functionality for memory items ---------- */
+if (memoryGrid) {
+  let touchStartX = 0;
+  let touchEndX = 0;
+  let currentFilter = 'all';
+  
+  memoryGrid.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  }, false);
+  
+  memoryGrid.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+  }, false);
+  
+  function handleSwipe() {
+    const diff = touchStartX - touchEndX;
+    const threshold = 50; // ৫০px এর বেশি সুইপ করলে কাজ করবে
+    
+    if (Math.abs(diff) > threshold) {
+      const items = memoryGrid.querySelectorAll('.mem-item');
+      
+      if (diff > 0) {
+        // Right to Left (পরবর্তী)
+        items.forEach(item => {
+          item.classList.add('slide-in-next');
+          setTimeout(() => item.classList.remove('slide-in-next'), 400);
+        });
+      } else {
+        // Left to Right (আগেরটা)
+        items.forEach(item => {
+          item.classList.add('slide-in-prev');
+          setTimeout(() => item.classList.remove('slide-in-prev'), 400);
+        });
+      }
+    }
+  }
+}
+
   const MEMORIES = [
     { type: 'photo', src: 'memory/Last_Class_2026-08-31_at_23.21.24.jpeg', caption: 'Campus, 2025' },  // { type: 'photo', src: 'memory/example1.jpg', caption: 'Campus, 2026' },
     // { type: 'youtube', id: 'dQw4w9WgXcQ', caption: 'Department program' },
