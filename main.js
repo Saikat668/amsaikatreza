@@ -117,7 +117,7 @@ document.querySelectorAll('.card').forEach(c => c.addEventListener('pointermove'
 const memoryGrid = document.getElementById('memoryGrid');
 if (memoryGrid) {
   const MEMORIES = [
-    { type: 'photo', src: 'memory/20250626_182226.jpg', caption: 'Campus, 2025' },  // { type: 'photo', src: 'memory/example1.jpg', caption: 'Campus, 2026' },
+    { type: 'photo', src: 'memory/Last_Class_2026-08-31_at_23.21.24.jpeg', caption: 'Campus, 2025' },  // { type: 'photo', src: 'memory/example1.jpg', caption: 'Campus, 2026' },
     // { type: 'youtube', id: 'dQw4w9WgXcQ', caption: 'Department program' },
     { type: 'video', src: 'memory/TOM_ai.mp4', caption: 'My TOM' }// { type: 'video', src: 'memory/clip1.mp4', caption: 'Farewell' },
   ];
