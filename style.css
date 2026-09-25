@@ -110,3 +110,25 @@
     .mem-item:hover { transform: scale(1.04); border-color: rgba(255,255,255,.35); }
     .play-badge { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
       font-size: 1.1rem; color: #fff; background: rgba(5,7,20,.35); }
+
+/* ---------- Memory gallery swipe animation ---------- */
+.mem-grid-wrapper {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+}
+
+.mem-item { touch-action: pan-y; user-select: none; }
+
+@keyframes slideInNext {
+  from { opacity: 0; transform: translateX(60px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInPrev {
+  from { opacity: 0; transform: translateX(-60px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.mem-item.slide-in-next { animation: slideInNext 0.4s ease-out; }
+.mem-item.slide-in-prev { animation: slideInPrev 0.4s ease-out; }
