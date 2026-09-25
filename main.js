@@ -2,7 +2,8 @@
 const PAGES = [
   { href: 'index.html', bn: 'হোম', en: 'Home' },
   { href: 'about.html', bn: 'পরিচিতি', en: 'About' },
-  { href: 'files.html', bn: 'ফাইলস', en: 'Files' }
+  { href: 'files.html', bn: 'ফাইলস', en: 'Files' },
+  { href: 'memory.html', bn: 'মেমোরি', en: 'Memory' }
 ];
 const here = location.pathname.split('/').pop() || 'index.html';
 const link = p => `<a href="${p.href}" class="nav-link text-sm font-medium ${p.href === here ? 'active' : 'text-[color:var(--muted)] hover:text-white'}"><span class="lang-bn">${p.bn}</span><span class="lang-en">${p.en}</span></a>`;
@@ -104,3 +105,66 @@ document.querySelectorAll('.card').forEach(c => c.addEventListener('pointermove'
   c.style.setProperty('--mx', (e.clientX - r.left) + 'px');
   c.style.setProperty('--my', (e.clientY - r.top) + 'px');
 }));
+
+/* ---------- Memory gallery (memory.html) ----------
+   নতুন ছবি/ভিডিও যোগ করতে শুধু নিচের MEMORIES list-এ একটা লাইন বাড়াও:
+   - ছবি:  { type: 'photo', src: 'memory/filename.jpg', caption: 'যা খুশি লিখতে পারো' }
+     (photo file গুলো repo-তে একটা "memory" ফোল্ডার বানিয়ে তার ভেতরে রাখো)
+   - YouTube ভিডিও: { type: 'youtube', id: 'YOUTUBE_VIDEO_ID', caption: '...' }
+     (id হলো লিংকের watch?v= এর পরের অংশটুকু)
+   - নিজের mp4 ভিডিও: { type: 'video', src: 'memory/filename.mp4', caption: '...' }
+------------------------------------------------------------------ */
+const memoryGrid = document.getElementById('memoryGrid');
+if (memoryGrid) {
+  const MEMORIES = [
+    // { type: 'photo', src: 'memory/example1.jpg', caption: 'Campus, 2026' },
+    // { type: 'youtube', id: 'dQw4w9WgXcQ', caption: 'Department program' },
+    // { type: 'video', src: 'memory/clip1.mp4', caption: 'Farewell' },
+  ];
+
+  const emptyMsg = document.getElementById('memoryEmpty');
+  const thumb = m => {
+    if (m.type === 'photo') return `<img src="${m.src}" alt="${m.caption || ''}" loading="lazy" class="w-full h-full object-cover">`;
+    if (m.type === 'youtube') return `<img src="https://img.youtube.com/vi/${m.id}/hqdefault.jpg" alt="${m.caption || ''}" loading="lazy" class="w-full h-full object-cover"><span class="play-badge">▶</span>`;
+    if (m.type === 'video') return `<video src="${m.src}" muted class="w-full h-full object-cover"></video><span class="play-badge">▶</span>`;
+    return '';
+  };
+
+  function render(filter) {
+    const items = MEMORIES.filter(m => filter === 'all' || m.type === filter || (filter === 'video' && m.type === 'youtube'));
+    memoryGrid.innerHTML = items.map((m, i) => `
+      <button class="mem-item reveal" data-i="${i}" data-filter="${m.type === 'youtube' ? 'video' : m.type}" style="transition-delay:${(i % 8) * .05}s">
+        ${thumb(m)}
+      </button>`).join('');
+    emptyMsg.classList.toggle('hidden', items.length > 0);
+    memoryGrid.querySelectorAll('.mem-item').forEach(btn => {
+      btn.addEventListener('click', () => openLightbox(items[+btn.dataset.i]));
+      io.observe(btn);
+    });
+  }
+  render('all');
+
+  document.querySelectorAll('.mem-tab').forEach(tab => tab.addEventListener('click', () => {
+    document.querySelectorAll('.mem-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    render(tab.dataset.filter);
+  }));
+
+  const lb = document.getElementById('lightbox');
+  const lbContent = document.getElementById('lbContent');
+  function openLightbox(m) {
+    if (m.type === 'photo') lbContent.innerHTML = `<img src="${m.src}" alt="${m.caption || ''}" class="max-w-full max-h-[85vh] rounded-xl">`;
+    else if (m.type === 'youtube') lbContent.innerHTML = `<iframe class="w-full aspect-video rounded-xl" style="min-width:min(90vw,800px)" src="https://www.youtube.com/embed/${m.id}?autoplay=1" title="${m.caption || ''}" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+    else if (m.type === 'video') lbContent.innerHTML = `<video src="${m.src}" controls autoplay class="max-w-full max-h-[85vh] rounded-xl"></video>`;
+    lb.classList.remove('hidden');
+    lb.classList.add('flex');
+  }
+  function closeLightbox() {
+    lb.classList.add('hidden');
+    lb.classList.remove('flex');
+    lbContent.innerHTML = '';
+  }
+  document.getElementById('lbClose').addEventListener('click', closeLightbox);
+  lb.addEventListener('click', e => { if (e.target === lb) closeLightbox(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+}

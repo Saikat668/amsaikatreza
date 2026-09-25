@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="bn" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Files & Resources — A. M. Saikat Reza</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Hind+Siliguri:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="antialiased">
+<main>
+
+    <section class="page-head">
+      <div class="hero-in max-w-6xl mx-auto px-6 space-y-4">
+        <div class="text-sm font-semibold text-cyan-300"><span class="lang-bn">স্মৃতি</span><span class="lang-en">Memories</span></div>
+        <h1 class="display text-3xl md:text-5xl font-extrabold leading-tight">
+          <span class="lang-bn">মেমোরি</span><span class="lang-en">Memory</span>
+        </h1>
+        <p class="lang-bn text-[color:var(--muted)] text-lg max-w-2xl">ক্যাম্পাস জীবন, বন্ধু-বান্ধব ও বিভিন্ন মুহূর্তের ছবি ও ভিডিও।</p>
+        <p class="lang-en text-[color:var(--muted)] text-lg max-w-2xl">Photos and videos from campus life, friends, and memorable moments.</p>
+      </div>
+    </section>
+
+    <section class="pb-6">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="reveal flex items-center gap-2 mb-6" role="tablist" aria-label="Memory filter">
+          <button data-filter="all" class="mem-tab active px-4 py-2 rounded-xl text-sm font-semibold glass">
+            <span class="lang-bn">সব</span><span class="lang-en">All</span>
+          </button>
+          <button data-filter="photo" class="mem-tab px-4 py-2 rounded-xl text-sm font-semibold glass">
+            <span class="lang-bn">ছবি</span><span class="lang-en">Photos</span>
+          </button>
+          <button data-filter="video" class="mem-tab px-4 py-2 rounded-xl text-sm font-semibold glass">
+            <span class="lang-bn">ভিডিও</span><span class="lang-en">Videos</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="pb-20">
+      <div class="max-w-6xl mx-auto px-6">
+        <div id="memoryGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4"></div>
+        <p id="memoryEmpty" class="hidden text-center text-[color:var(--muted)] py-16">
+          <span class="lang-bn">এখনো কোনো মেমোরি যোগ করা হয়নি।</span><span class="lang-en">No memories added yet.</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="fixed inset-0 z-[60] hidden items-center justify-center p-4" style="background:rgba(5,7,20,.92)">
+      <button id="lbClose" aria-label="Close" class="absolute top-5 right-5 w-11 h-11 rounded-full glass grid place-items-center text-2xl leading-none">&times;</button>
+      <div id="lbContent" class="max-w-4xl w-full max-h-[85vh] flex items-center justify-center"></div>
+    </div>
+</main>
+<script src="main.js"></script>
+</body>
+</html>
