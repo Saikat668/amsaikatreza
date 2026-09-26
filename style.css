@@ -34,6 +34,316 @@
       pointer-events: none; animation: rise linear infinite; }
     @keyframes rise { to { transform: translateY(-115vh) rotate(360deg); } }
 
+/* =========================================================
+   ANIMATED MATHEMATICS SYMBOLS
+   ========================================================= */
+
+#symbols {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+
+  pointer-events: none;
+  z-index: 15;
+
+  /* Symbols should stay visually subtle. */
+  isolation: isolate;
+}
+
+.sym {
+  position: fixed;
+  top: var(--top);
+  left: 0;
+
+  pointer-events: none;
+
+  animation:
+    mathMove var(--duration)
+    linear var(--delay)
+    infinite alternate;
+
+  will-change: transform;
+}
+
+.math-symbol {
+  position: relative;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 52px;
+  height: 52px;
+
+  font-size: var(--size);
+  font-weight: 700;
+
+  color: rgba(255, 255, 255, 0.25);
+
+  cursor: help;
+  pointer-events: auto;
+
+  user-select: none;
+
+  border-radius: 50%;
+
+  transition:
+    color 0.3s ease,
+    transform 0.3s ease,
+    background 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+/* Soft mathematical-glow effect */
+.math-symbol::before {
+  content: "";
+
+  position: absolute;
+  inset: 5px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.10),
+      transparent 70%
+    );
+
+  opacity: 0;
+
+  transition: opacity 0.3s ease;
+
+  z-index: -1;
+}
+
+/* Hover effect */
+.math-symbol:hover,
+.math-symbol:focus-visible,
+.math-symbol.show-fact {
+  color: rgba(255, 255, 255, 0.95);
+
+  transform:
+    scale(1.18)
+    rotate(5deg);
+
+  background: rgba(255, 255, 255, 0.07);
+
+  box-shadow:
+    0 0 25px rgba(255, 255, 255, 0.12),
+    inset 0 0 18px rgba(255, 255, 255, 0.05);
+
+  outline: none;
+}
+
+.math-symbol:hover::before,
+.math-symbol:focus-visible::before,
+.math-symbol.show-fact::before {
+  opacity: 1;
+}
+
+
+/* =========================================================
+   MATH FACT TOOLTIP
+   ========================================================= */
+
+.math-fact {
+  position: absolute;
+
+  left: 50%;
+  top: calc(100% + 12px);
+
+  width: min(280px, 75vw);
+
+  padding: 12px 15px;
+
+  border-radius: 12px;
+
+  background:
+    rgba(15, 18, 30, 0.94);
+
+  border: 1px solid rgba(255, 255, 255, 0.14);
+
+  box-shadow:
+    0 12px 35px rgba(0, 0, 0, 0.35);
+
+  backdrop-filter: blur(12px);
+
+  color: rgba(255, 255, 255, 0.90);
+
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.55;
+
+  text-align: left;
+
+  opacity: 0;
+  visibility: hidden;
+
+  transform:
+    translate(-50%, -8px)
+    scale(0.96);
+
+  transform-origin: top center;
+
+  pointer-events: none;
+
+  transition:
+    opacity 0.25s ease,
+    visibility 0.25s ease,
+    transform 0.25s ease;
+
+  z-index: 100;
+}
+
+
+/* Little triangle above tooltip */
+.math-fact::before {
+  content: "";
+
+  position: absolute;
+
+  top: -6px;
+  left: 50%;
+
+  width: 11px;
+  height: 11px;
+
+  background: rgba(15, 18, 30, 0.94);
+
+  border-left: 1px solid rgba(255, 255, 255, 0.14);
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+
+  transform:
+    translateX(-50%)
+    rotate(45deg);
+}
+
+
+/* Show fact */
+.math-symbol:hover .math-fact,
+.math-symbol:focus-visible .math-fact,
+.math-symbol.show-fact .math-fact {
+  opacity: 1;
+  visibility: visible;
+
+  transform:
+    translate(-50%, 0)
+    scale(1);
+}
+
+
+/* Fact changing animation */
+.math-fact.fact-refresh {
+  animation: factRefresh 0.35s ease;
+}
+
+@keyframes factRefresh {
+  0% {
+    opacity: 0.4;
+    transform: translate(-50%, 4px) scale(0.98);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1);
+  }
+}
+
+
+/* =========================================================
+   LEFT ↔ RIGHT MOVEMENT
+   ========================================================= */
+
+@keyframes mathMove {
+  0% {
+    transform:
+      translateX(-12vw)
+      rotate(-8deg);
+  }
+
+  50% {
+    transform:
+      translateX(48vw)
+      rotate(8deg);
+  }
+
+  100% {
+    transform:
+      translateX(112vw)
+      rotate(-8deg);
+  }
+}
+
+
+/* Reverse direction */
+.sym.reverse {
+  animation-name: mathMoveReverse;
+}
+
+@keyframes mathMoveReverse {
+  0% {
+    transform:
+      translateX(112vw)
+      rotate(8deg);
+  }
+
+  50% {
+    transform:
+      translateX(48vw)
+      rotate(-8deg);
+  }
+
+  100% {
+    transform:
+      translateX(-12vw)
+      rotate(8deg);
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+  .math-symbol {
+    width: 44px;
+    height: 44px;
+  }
+
+  .math-fact {
+    width: min(240px, 78vw);
+
+    font-size: 12px;
+
+    padding: 10px 12px;
+  }
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .sym {
+    animation: none;
+  }
+
+  .math-symbol {
+    transition: none;
+  }
+
+  .math-fact {
+    transition: opacity 0.15s ease;
+  }
+}
+
     /* ---------- Header ---------- */
     .glass { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12);
       -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
