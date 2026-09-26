@@ -54,6 +54,236 @@ chars.forEach((c, i) => {
   box.appendChild(s);
 });
 
+/* ---------- Animated Math Symbols + Math Facts ---------- */
+
+const mathFacts = [
+  {
+    symbol: "π",
+    facts: [
+      "π is an irrational number, so its decimal expansion never ends or repeats.",
+      "The first digits of π are 3.1415926535…",
+      "π represents the ratio of a circle's circumference to its diameter.",
+      "The Greek letter π was popularized for this mathematical constant by Euler."
+    ]
+  },
+  {
+    symbol: "∑",
+    facts: [
+      "The symbol ∑ is called Sigma and is used to represent summation.",
+      "Σ notation lets us write many additions in a compact mathematical form.",
+      "The sum 1 + 2 + ... + n equals n(n+1)/2.",
+      "Summation notation is widely used in calculus, statistics and discrete mathematics."
+    ]
+  },
+  {
+    symbol: "∫",
+    facts: [
+      "The symbol ∫ represents integration.",
+      "A definite integral can represent the area under a curve.",
+      "Integration is closely connected to differentiation through the Fundamental Theorem of Calculus.",
+      "The elongated ∫ symbol originated from an old form of the letter S for 'sum'."
+    ]
+  },
+  {
+    symbol: "∞",
+    facts: [
+      "∞ represents infinity, an idea of something without bound.",
+      "Infinity is not an ordinary real number.",
+      "There are different sizes of infinity in set theory.",
+      "The symbol ∞ was introduced by John Wallis in the 17th century."
+    ]
+  },
+  {
+    symbol: "√",
+    facts: [
+      "The symbol √ is called the radical sign.",
+      "√x represents the principal square root of x when x is nonnegative.",
+      "The square root of 2 is irrational.",
+      "The square root operation reverses squaring for nonnegative numbers."
+    ]
+  },
+  {
+    symbol: "Δ",
+    facts: [
+      "Δ is often used to represent a change or difference.",
+      "In geometry, Δ is commonly associated with triangles.",
+      "In numerical methods, Δx can represent a small change in x.",
+      "The Greek letter Delta is the fourth letter of the Greek alphabet."
+    ]
+  },
+  {
+    symbol: "∂",
+    facts: [
+      "∂ is used for partial derivatives.",
+      "A partial derivative measures how a function changes with respect to one variable while others are held fixed.",
+      "Partial derivatives are fundamental in multivariable calculus.",
+      "They are widely used in physics, economics and mathematical modeling."
+    ]
+  },
+  {
+    symbol: "∇",
+    facts: [
+      "∇ is called nabla or del.",
+      "The gradient of a scalar field points in the direction of greatest increase.",
+      "∇ can also be used to define divergence and curl.",
+      "The gradient operator is central to vector calculus."
+    ]
+  },
+  {
+    symbol: "λ",
+    facts: [
+      "λ is commonly used for eigenvalues in linear algebra.",
+      "If Av = λv, then λ is an eigenvalue corresponding to eigenvector v.",
+      "Eigenvalues are important in differential equations and dynamical systems.",
+      "λ is also frequently used as a parameter in mathematical models."
+    ]
+  },
+  {
+    symbol: "φ",
+    facts: [
+      "φ is often used to represent the golden ratio.",
+      "The golden ratio is approximately 1.618.",
+      "The golden ratio satisfies φ² = φ + 1.",
+      "φ appears in several mathematical patterns involving Fibonacci numbers."
+    ]
+  },
+  {
+    symbol: "θ",
+    facts: [
+      "θ is commonly used to represent an angle.",
+      "Trigonometric functions such as sin(θ), cos(θ) and tan(θ) depend on an angle.",
+      "Angles can be measured in degrees or radians.",
+      "In mathematics and physics, θ is frequently used as a variable parameter."
+    ]
+  },
+  {
+    symbol: "≈",
+    facts: [
+      "The symbol ≈ means approximately equal to.",
+      "Approximation is useful when an exact value is difficult or unnecessary to calculate.",
+      "π ≈ 3.14159 is a common mathematical approximation.",
+      "Numerical methods often produce approximate solutions."
+    ]
+  },
+  {
+    symbol: "x²",
+    facts: [
+      "x² means x multiplied by itself.",
+      "The graph of y = x² is called a parabola.",
+      "For every real x, x² is nonnegative.",
+      "Quadratic equations are closely connected to expressions involving x²."
+    ]
+  },
+  {
+    symbol: "e",
+    facts: [
+      "The mathematical constant e is approximately 2.71828.",
+      "e is the base of the natural logarithm.",
+      "The function eˣ has the special property that its derivative is itself.",
+      "The number e appears naturally in growth, decay and differential equations."
+    ]
+  }
+];
+
+const symbolsBox = document.getElementById("symbols");
+
+if (symbolsBox) {
+  // Allow the symbols to interact with the mouse.
+  symbolsBox.removeAttribute("aria-hidden");
+
+  // Create one animated symbol.
+  function createMathSymbol(index) {
+    const data = mathFacts[index % mathFacts.length];
+
+    const symbol = document.createElement("div");
+    symbol.className = "sym";
+
+    symbol.innerHTML = `
+      <span class="math-symbol" tabindex="0" role="button"
+            aria-label="Mathematics symbol ${data.symbol}">
+        ${data.symbol}
+        <span class="math-fact" role="tooltip"></span>
+      </span>
+    `;
+
+    const symbolElement = symbol.querySelector(".math-symbol");
+    const factElement = symbol.querySelector(".math-fact");
+
+    // Random position and animation settings.
+    const top = 8 + Math.random() * 78;
+    const duration = 16 + Math.random() * 18;
+    const delay = Math.random() * 15;
+    const size = 1.3 + Math.random() * 1.5;
+
+    symbol.style.setProperty("--top", `${top}vh`);
+    symbol.style.setProperty("--duration", `${duration}s`);
+    symbol.style.setProperty("--delay", `${delay}s`);
+    symbol.style.setProperty("--size", `${size}rem`);
+
+    // Random direction.
+    if (Math.random() > 0.5) {
+      symbol.classList.add("reverse");
+    }
+
+    let currentFact = Math.floor(Math.random() * data.facts.length);
+
+    function updateFact() {
+      factElement.textContent = data.facts[currentFact];
+
+      currentFact = (currentFact + 1) % data.facts.length;
+    }
+
+    updateFact();
+
+    // Change fact automatically every 7–13 seconds.
+    const factInterval = 7000 + Math.random() * 6000;
+
+    setInterval(() => {
+      updateFact();
+
+      // If currently visible, gently refresh the tooltip.
+      if (symbolElement.matches(":hover") ||
+          document.activeElement === symbolElement) {
+        factElement.classList.add("fact-refresh");
+
+        setTimeout(() => {
+          factElement.classList.remove("fact-refresh");
+        }, 350);
+      }
+    }, factInterval);
+
+    // Mouse hover.
+    symbolElement.addEventListener("mouseenter", () => {
+      symbolElement.classList.add("show-fact");
+    });
+
+    symbolElement.addEventListener("mouseleave", () => {
+      symbolElement.classList.remove("show-fact");
+    });
+
+    // Keyboard accessibility.
+    symbolElement.addEventListener("focus", () => {
+      symbolElement.classList.add("show-fact");
+    });
+
+    symbolElement.addEventListener("blur", () => {
+      symbolElement.classList.remove("show-fact");
+    });
+
+    // Mobile/touch support.
+    symbolElement.addEventListener("click", () => {
+      symbolElement.classList.toggle("show-fact");
+    });
+
+    symbolsBox.appendChild(symbol);
+  }
+
+  // Create 12 animated symbols.
+  for (let i = 0; i < 12; i++) {
+    createMathSymbol(i);
+  }
+}
+
 /* ---------- Drive folders (files.html) — link বদলাতে শুধু এই list edit করো ---------- */
 const grid = document.getElementById('folderGrid');
 if (grid) {
