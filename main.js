@@ -347,6 +347,7 @@ document.querySelectorAll('.card').forEach(c => c.addEventListener('pointermove'
 const memoryGrid = document.getElementById('memoryGrid');
 if (memoryGrid) {
   const MEMORIES = [
+    { type: 'photo', src: 'memory/20251121_182610.jpg', caption: 'Campus, 2025' },
     { type: 'photo', src: 'memory/Last_Class_2026-08-31_at_23.21.24.jpeg', caption: 'Campus, 2025' },  // { type: 'photo', src: 'memory/example1.jpg', caption: 'Campus, 2026' },
     { type: 'photo', src: 'memory/IMG20250618164304.jpg', caption: 'Campus, 2025' },
     // { type: 'youtube', id: 'dQw4w9WgXcQ', caption: 'Department program' },
